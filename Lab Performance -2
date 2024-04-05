@@ -10,3 +10,127 @@ Give examples demonstrating the use of this to refer to instance variables and m
 Task-2: 
 a.	Recall the basic principles of exception handling in Java, give example of try-catch blocks and the handling of checked exception. 
 b.  Write a program to demonstrate Interface and implements multiple interface in a java.
+
+
+TASK-1:->
+The super Keyword:
+
+-The super keyword in Java is used to refer to the immediate parent class of a subclass.
+-It's mainly used to access superclass members (variables and methods) or to invoke superclass constructors.
+-Example 1: Accessing superclass variables or methods:
+class Vehicle {
+    int maxSpeed = 100;
+}
+
+class Car extends Vehicle {
+    int maxSpeed = 200;
+    
+    void display() {
+        System.out.println("Superclass max speed: " + super.maxSpeed); // Accessing superclass variable
+    }
+}
+-Example 2: Invoking superclass constructor:
+class Vehicle {
+    int maxSpeed;
+    
+    Vehicle(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+}
+
+class Car extends Vehicle {
+    Car(int maxSpeed) {
+        super(maxSpeed); // Invoking superclass constructor
+    }
+}
+
+The this Keyword:
+-The this keyword in Java is used to refer to the current instance of a class.
+-It's mainly used to refer to instance variables and methods within the same class.
+-Example 1: Referring to instance variables:
+java
+Copy code
+class Car {
+    String model;
+    
+    Car(String model) {
+        this.model = model; // Using 'this' to refer to instance variable
+    }
+}
+-Example 2: Referring to instance methods:
+class Car {
+    void display() {
+        System.out.println("This is the display method."); // Using 'this' to refer to instance method
+    }
+    
+    void callDisplay() {
+        this.display(); // Calling instance method using 'this'
+    }
+}
+-Scenario where using 'this' is necessary: When there's a name conflict between instance variables and parameters or when you want to explicitly refer to instance variables, using this becomes necessary for clarification.
+class Car {
+    String model;
+    
+    Car(String model) {
+        this.model = model; // Using 'this' to disambiguate between parameter and instance variable
+    }
+}
+
+
+TASK-2:->
+a. Exception Handling in Java:
+
+-Exception handling in Java allows you to deal with unexpected or erroneous situations in your code.
+-Key concepts include:
+  >try-catch blocks: They are used to enclose code that might throw an exception and handle it gracefully.
+  >Checked exceptions: These are exceptions that the compiler forces you to handle or declare using the throws keyword in the method signature.
+-Example of try-catch block handling a checked exception:
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class FileReadExample {
+    public static void main(String[] args) {
+        try {
+            File file = new File("example.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+    }
+}
+
+
+B) Demonstration of Interface and Implementing Multiple Interfaces:
+
+-Interfaces in Java define a contract for classes to follow by specifying methods that implementing classes must implement.
+-A class can implement multiple interfaces.
+-Example:
+interface Animal {
+    void sound();
+}
+
+interface Runnable {
+    void run();
+}
+class Dog implements Animal, Runnable {
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+    
+    public void run() {
+        System.out.println("Dog runs");
+    }
+}
+
+public class InterfaceExample {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.sound();
+        dog.run();
+    }
+}
